@@ -1,3 +1,9 @@
+---
+title: "Teaching"
+layout: page
+permalink: /teaching/
+---
+
 ## Instructor:
 - **ENGR21 - Probability and Statistics for Engineers**, Spring 2024
   - Details: 36 undergrad students, teaching evaluation: 4.33/5
