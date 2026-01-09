@@ -9,6 +9,20 @@ nav_order: 2
 
 <div class="publications">
 
-{% bibliography %}
+{% bibliography --group_by year --group_order descending %}
 
 </div>
+
+<style>
+.publications h2 {
+  font-weight: bold;
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+  color: #333;
+}
+.publications h2:first-child {
+  margin-top: 0;
+}
+</style>
