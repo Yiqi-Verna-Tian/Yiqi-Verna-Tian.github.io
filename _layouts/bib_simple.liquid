@@ -152,54 +152,12 @@
       {% endif %}
     </div>
 
-    <!-- Links - Simple text format with pipes -->
+    <!-- Links - Only Code and Slides -->
     <div class="links" style="font-size: 0.9em; color: #666;">
       {% assign link_count = 0 %}
-      {% if entry.pdf %}
-        {% assign link_count = link_count | plus: 1 %}
-        {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" target="_blank" style="color: #1a73e8; text-decoration: none;">PDF</a>
-        {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">PDF</a>
-        {% endif %}
-      {% endif %}
       {% if entry.code %}
-        {% if link_count > 0 %} | {% endif %}
         {% assign link_count = link_count | plus: 1 %}
         <a href="{{ entry.code }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Code</a>
-      {% endif %}
-      {% if entry.arxiv %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" target="_blank" style="color: #1a73e8; text-decoration: none;">arXiv</a>
-      {% endif %}
-      {% if entry.doi %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        <a href="https://doi.org/{{ entry.doi }}" target="_blank" style="color: #1a73e8; text-decoration: none;">DOI</a>
-      {% endif %}
-      {% if entry.html %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        {% if entry.html contains '://' %}
-          <a href="{{ entry.html }}" target="_blank" style="color: #1a73e8; text-decoration: none;">HTML</a>
-        {% else %}
-          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">HTML</a>
-        {% endif %}
-      {% endif %}
-      {% if entry.video %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        <a href="{{ entry.video }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Video</a>
-      {% endif %}
-      {% if entry.poster %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        {% if entry.poster contains '://' %}
-          <a href="{{ entry.poster }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Poster</a>
-        {% else %}
-          <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Poster</a>
-        {% endif %}
       {% endif %}
       {% if entry.slides %}
         {% if link_count > 0 %} | {% endif %}
@@ -209,11 +167,6 @@
         {% else %}
           <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Slides</a>
         {% endif %}
-      {% endif %}
-      {% if entry.website %}
-        {% if link_count > 0 %} | {% endif %}
-        {% assign link_count = link_count | plus: 1 %}
-        <a href="{{ entry.website }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Website</a>
       {% endif %}
     </div>
   </div>
