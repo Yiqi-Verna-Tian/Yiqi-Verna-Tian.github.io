@@ -145,7 +145,7 @@
     {% if entry.year %}
       {% capture entrytype %}{{ entrytype }}{{ ", " }}{{ entry.year }}{% endcapture %}
     {% endif %}
-    <div class="periodical mb-2" style="margin-bottom: 0.5rem; color: #666; font-size: 0.9em;">
+    <div class="periodical mb-2" style="margin-bottom: 0.5rem; color: #000; font-size: 1em; font-weight: bold;">
       {{ entrytype | strip }}
       {% if entry.note %}
         <span style="color: #1a73e8; font-weight: 500; margin-left: 0.5rem;">({{ entry.note }})</span>
