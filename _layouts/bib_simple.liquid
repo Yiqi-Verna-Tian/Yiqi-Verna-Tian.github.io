@@ -21,18 +21,29 @@
   <div class="col-sm-9">
     <!-- Title -->
     <div class="title mb-1" style="font-size: 1.1em; font-weight: 500; margin-bottom: 0.5rem;">
+      {% assign title_link = null %}
       {% if entry.html %}
         {% if entry.html contains '://' %}
-          <a href="{{ entry.html }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
+          {% assign title_link = entry.html %}
         {% else %}
-          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
+          {% assign title_link = entry.html | prepend: '/assets/html/' | relative_url %}
         {% endif %}
+      {% elsif entry.url %}
+        {% assign title_link = entry.url %}
+      {% elsif entry.doi %}
+        {% assign title_link = 'https://doi.org/' | append: entry.doi %}
+      {% elsif entry.arxiv %}
+        {% assign title_link = 'http://arxiv.org/abs/' | append: entry.arxiv %}
       {% elsif entry.pdf %}
         {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
+          {% assign title_link = entry.pdf %}
         {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
+          {% assign title_link = entry.pdf | prepend: '/assets/pdf/' | relative_url %}
         {% endif %}
+      {% endif %}
+      
+      {% if title_link %}
+        <a href="{{ title_link }}" target="_blank" style="color: #1a73e8; text-decoration: none; cursor: pointer;">{{ entry.title }}</a>
       {% else %}
         {{ entry.title }}
       {% endif %}
@@ -88,7 +99,34 @@
         {% if more_authors > 1 %}
           {% assign more_authors_hide = more_authors_hide | append: 's' %}
         {%- endif -%}
-        , and <span class="more-authors">{{- more_authors_hide -}}</span>
+        {% assign more_authors_show = '' %}
+        {%- for author in entry.author_array offset: author_array_limit -%}
+          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: author.last %}
+          {% unless forloop.last %}
+            {% assign more_authors_show = more_authors_show | append: ', ' %}
+          {% endunless %}
+        {%- endfor -%}
+        {%- assign more_authors_show = more_authors_show | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
+        , and
+        <span
+          class="more-authors"
+          title="click to view {{ more_authors_hide }}"
+          onclick="
+              var element = $(this);
+              element.attr('title', '');
+              var more_authors_text = element.text() == '{{ more_authors_hide }}' ? '{{ more_authors_show }}' : '{{ more_authors_hide }}';
+              var cursorPosition = 0;
+              var textAdder = setInterval(function(){
+                element.html(more_authors_text.substring(0, cursorPosition + 1));
+                if (++cursorPosition == more_authors_text.length){
+                  clearInterval(textAdder);
+                }
+            }, '{{ site.more_authors_animation_delay }}');
+          "
+          style="color: #1a73e8; cursor: pointer; border-bottom: 1px dashed #1a73e8;"
+        >
+          {{- more_authors_hide -}}
+        </span>
       {% endif %}
     </div>
 
