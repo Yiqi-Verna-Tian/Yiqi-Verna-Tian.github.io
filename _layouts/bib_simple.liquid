@@ -1,24 +1,17 @@
 ---
 ---
-<div class="row mb-4">
+<div class="row mb-4" style="margin-bottom: 2rem;">
   <!-- Image on the left -->
-  <div class="col-sm-3">
+  <div class="col-sm-3" style="padding-right: 1rem;">
     {% if entry.preview %}
       {% if entry.preview contains '://' %}
-        <img class="img-fluid rounded z-depth-1" src="{{ entry.preview }}" alt="{{ entry.title }}">
+        <img class="img-fluid rounded" src="{{ entry.preview }}" alt="{{ entry.title }}" style="width: 100%; max-width: 200px;">
       {% else %}
         {% assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
-        {% include figure.liquid
-          loading="eager"
-          path=entry_path
-          sizes="(min-width: 768px) 200px, 100vw"
-          class="img-fluid rounded z-depth-1"
-          zoomable=true
-          alt=entry.title
-        %}
+        <img class="img-fluid rounded" src="{{ entry_path | relative_url }}" alt="{{ entry.title }}" style="width: 100%; max-width: 200px;">
       {% endif %}
     {% else %}
-      <div class="placeholder-img rounded z-depth-1" style="width: 100%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999;">
+      <div class="placeholder-img rounded" style="width: 100%; max-width: 200px; height: 120px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.9em;">
         No Image
       </div>
     {% endif %}
@@ -27,26 +20,26 @@
   <!-- Content on the right -->
   <div class="col-sm-9">
     <!-- Title -->
-    <div class="title mb-2">
+    <div class="title mb-1" style="font-size: 1.1em; font-weight: 500; margin-bottom: 0.5rem;">
       {% if entry.html %}
         {% if entry.html contains '://' %}
-          <strong><a href="{{ entry.html }}" target="_blank" style="color: inherit; text-decoration: none;">{{ entry.title }}</a></strong>
+          <a href="{{ entry.html }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
         {% else %}
-          <strong><a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" target="_blank" style="color: inherit; text-decoration: none;">{{ entry.title }}</a></strong>
+          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
         {% endif %}
       {% elsif entry.pdf %}
         {% if entry.pdf contains '://' %}
-          <strong><a href="{{ entry.pdf }}" target="_blank" style="color: inherit; text-decoration: none;">{{ entry.title }}</a></strong>
+          <a href="{{ entry.pdf }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
         {% else %}
-          <strong><a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: inherit; text-decoration: none;">{{ entry.title }}</a></strong>
+          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">{{ entry.title }}</a>
         {% endif %}
       {% else %}
-        <strong>{{ entry.title }}</strong>
+        {{ entry.title }}
       {% endif %}
     </div>
 
     <!-- Authors -->
-    <div class="author mb-2">
+    <div class="author mb-1" style="margin-bottom: 0.5rem; font-size: 0.95em;">
       {% assign author_array_size = entry.author_array | size %}
       {% assign author_array_limit = author_array_size %}
       {% if site.max_author_limit and author_array_size > site.max_author_limit %}
@@ -80,10 +73,10 @@
           {%- if forloop.last and author_array_limit == author_array_size %}and {% endif -%}
         {% endif %}
         {%- if author_is_self -%}
-          <em>{{- author.first }} {{ author_last_html -}}</em>
+          <strong>{{- author.first }} {{ author_last_html -}}</strong>
         {%- else -%}
           {%- if coauthor_url -%}
-            <a href="{{ coauthor_url }}">{{- author.first }} {{ author_last_html -}}</a>
+            <a href="{{ coauthor_url }}" style="color: #1a73e8; text-decoration: none;">{{- author.first }} {{ author_last_html -}}</a>
           {%- else -%}
             {{- author.first }} {{ author_last_html -}}
           {% endif %}
@@ -95,7 +88,7 @@
         {% if more_authors > 1 %}
           {% assign more_authors_hide = more_authors_hide | append: 's' %}
         {%- endif -%}
-        , and <span class="more-authors" title="click to view {{ more_authors_hide }}">{{- more_authors_hide -}}</span>
+        , and <span class="more-authors">{{- more_authors_hide -}}</span>
       {% endif %}
     </div>
 
@@ -103,68 +96,83 @@
     {% assign proceedings = 'inproceedings,incollection' | split: ',' %}
     {% assign thesis = 'thesis,mastersthesis,phdthesis' | split: ',' %}
     {% if entry.type == 'article' %}
-      {% capture entrytype %}<em>{{ entry.journal }}</em>{% endcapture %}
+      {% capture entrytype %}{{ entry.journal }}{% endcapture %}
     {% elsif proceedings contains entry.type %}
-      {% capture entrytype %}<em>{{ entry.booktitle }}</em>{% endcapture %}
+      {% capture entrytype %}{{ entry.booktitle }}{% endcapture %}
     {% elsif thesis contains entry.type %}
-      {% capture entrytype %}<em>{{ entry.school }}</em>{% endcapture %}
+      {% capture entrytype %}{{ entry.school }}{% endcapture %}
     {% else %}
       {% capture entrytype %}{% endcapture %}
-    {% endif %}
-    {% if entry.location %}
-      {% capture entrytype %}{{ entrytype }}{{ ", " }}{{ entry.location }}{% endcapture %}
     {% endif %}
     {% if entry.year %}
       {% capture entrytype %}{{ entrytype }}{{ ", " }}{{ entry.year }}{% endcapture %}
     {% endif %}
-    <div class="periodical mb-2 text-muted">
+    <div class="periodical mb-2" style="margin-bottom: 0.5rem; color: #666; font-size: 0.9em;">
       {{ entrytype | strip }}
     </div>
 
-    <!-- Links -->
-    <div class="links">
+    <!-- Links - Simple text format with pipes -->
+    <div class="links" style="font-size: 0.9em; color: #666;">
+      {% assign link_count = 0 %}
       {% if entry.pdf %}
+        {% assign link_count = link_count | plus: 1 %}
         {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" class="btn btn-sm btn-outline-primary mr-1 mb-1" target="_blank">PDF</a>
+          <a href="{{ entry.pdf }}" target="_blank" style="color: #1a73e8; text-decoration: none;">PDF</a>
         {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm btn-outline-primary mr-1 mb-1" target="_blank">PDF</a>
+          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">PDF</a>
         {% endif %}
       {% endif %}
       {% if entry.code %}
-        <a href="{{ entry.code }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Code</a>
-      {% endif %}
-      {% if entry.doi %}
-        <a href="https://doi.org/{{ entry.doi }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">DOI</a>
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
+        <a href="{{ entry.code }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Code</a>
       {% endif %}
       {% if entry.arxiv %}
-        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">arXiv</a>
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
+        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" target="_blank" style="color: #1a73e8; text-decoration: none;">arXiv</a>
+      {% endif %}
+      {% if entry.doi %}
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
+        <a href="https://doi.org/{{ entry.doi }}" target="_blank" style="color: #1a73e8; text-decoration: none;">DOI</a>
       {% endif %}
       {% if entry.html %}
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
         {% if entry.html contains '://' %}
-          <a href="{{ entry.html }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">HTML</a>
+          <a href="{{ entry.html }}" target="_blank" style="color: #1a73e8; text-decoration: none;">HTML</a>
         {% else %}
-          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">HTML</a>
+          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">HTML</a>
         {% endif %}
       {% endif %}
       {% if entry.video %}
-        <a href="{{ entry.video }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Video</a>
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
+        <a href="{{ entry.video }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Video</a>
       {% endif %}
       {% if entry.poster %}
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
         {% if entry.poster contains '://' %}
-          <a href="{{ entry.poster }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Poster</a>
+          <a href="{{ entry.poster }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Poster</a>
         {% else %}
-          <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Poster</a>
+          <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Poster</a>
         {% endif %}
       {% endif %}
       {% if entry.slides %}
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
         {% if entry.slides contains '://' %}
-          <a href="{{ entry.slides }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Slides</a>
+          <a href="{{ entry.slides }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Slides</a>
         {% else %}
-          <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Slides</a>
+          <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Slides</a>
         {% endif %}
       {% endif %}
       {% if entry.website %}
-        <a href="{{ entry.website }}" class="btn btn-sm btn-outline-secondary mr-1 mb-1" target="_blank">Website</a>
+        {% if link_count > 0 %} | {% endif %}
+        {% assign link_count = link_count | plus: 1 %}
+        <a href="{{ entry.website }}" target="_blank" style="color: #1a73e8; text-decoration: none;">Website</a>
       {% endif %}
     </div>
   </div>
