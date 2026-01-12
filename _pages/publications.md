@@ -8,6 +8,7 @@ nav_order: 2
 ---
 
 <div class="publications">
+<p style="margin-bottom: 1.5rem; font-size: 0.9rem;">* denotes equal contribution (co-first authors)</p>
 
 {% bibliography --group_by year --group_order descending %}
 
