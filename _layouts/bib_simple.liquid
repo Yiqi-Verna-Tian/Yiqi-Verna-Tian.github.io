@@ -59,13 +59,19 @@
 
       {%- for author in entry.author_array limit: author_array_limit -%}
         {% assign author_is_self = false %}
-        {%- assign author_last_name = author.last | regex_replace: '[*∗†‡§¶‖&^]', '' -%}
+        {%- assign author_last_name = author.last | regex_replace: '[*∗†‡§¶‖&^]', '' | strip -%}
         {%- assign author_last_html = author.last | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
-        {% if site.scholar.last_name contains author_last_name %}
-          {% if site.scholar.first_name contains author.first %}
-            {% assign author_is_self = true %}
+        {%- for last_name in site.scholar.last_name -%}
+          {% if last_name == author_last_name %}
+            {%- for first_name in site.scholar.first_name -%}
+              {% if first_name == author.first %}
+                {% assign author_is_self = true %}
+                {% break %}
+              {% endif %}
+            {%- endfor -%}
+            {% if author_is_self %}{% break %}{% endif %}
           {% endif %}
-        {%- endif -%}
+        {%- endfor -%}
         {% assign coauthor_url = null %}
         {%- assign clean_last_name = author_last_name | downcase | remove_accents -%}
         {% if site.data.coauthors[clean_last_name] %}
@@ -84,7 +90,7 @@
           {%- if forloop.last and author_array_limit == author_array_size %}and {% endif -%}
         {% endif %}
         {%- if author_is_self -%}
-          <strong style="font-weight: bold; color: #000;">{{- author.first }} {{ author_last_html -}}</strong>
+          <strong class="author-self" style="font-weight: bold;">{{- author.first }} {{ author_last_html -}}</strong>
         {%- else -%}
           {%- if coauthor_url -%}
             <a href="{{ coauthor_url }}" style="color: #1a73e8; text-decoration: none;">{{- author.first }} {{ author_last_html -}}</a>
@@ -145,7 +151,7 @@
     {% if entry.year %}
       {% capture entrytype %}{{ entrytype }}{{ ", " }}{{ entry.year }}{% endcapture %}
     {% endif %}
-    <div class="periodical mb-2" style="margin-bottom: 0.5rem; color: #444; font-size: 1em; font-weight: normal; font-style: italic;">
+    <div class="periodical mb-2" style="margin-bottom: 0.5rem; font-size: 1em; font-weight: normal; font-style: italic;">
       {{ entrytype | strip }}
       {% if entry.note %}
         <span style="color: #1a73e8; font-weight: 500; margin-left: 0.5rem;">({{ entry.note }})</span>
@@ -186,3 +192,22 @@
   </div>
 </div>
 
+<style>
+  /* Author name styling - supports dark mode */
+  .author-self {
+    color: #000;
+  }
+  
+  html[data-theme="dark"] .author-self {
+    color: #e0e0e0 !important;
+  }
+  
+  /* Periodical/Journal styling - supports dark mode */
+  .periodical {
+    color: #444;
+  }
+  
+  html[data-theme="dark"] .periodical {
+    color: #b0b0b0 !important;
+  }
+</style>
