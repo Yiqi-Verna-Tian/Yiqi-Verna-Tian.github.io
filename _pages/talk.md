@@ -7,6 +7,13 @@ nav: true
 nav_order: 6
 ---
 
+## 2026
+
+- **A Computational Study on Distributionally Robust Optimization**<br>
+  *[ICBO 2026](https://bileveloptimization.org/icbo/2026/index.html) | 08/2026 | Pittsburgh, PA*
+
+---
+
 ## 2025
 - **RODS: Robust Optimization Inspired Diffusion Sampling for Detecting and Reducing Hallucination in Generative Models**  
   *NeurIPS 2025 | 12/2025 | San Diego, CA*

@@ -9,9 +9,10 @@ profile:
   image: YiqiTian_Headshot.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>yit30 [at] pitt [dot] edu</p>
-    <p>Benedum Hall, 3700 Ohara Street</p>
-    <p>Pittsburgh, PA 15213</p>
+    <p>ytian0 [at] mgh [dot] harvard [dot] edu</p>
+    <p>Massachusetts General Hospital</p>
+    <p>399 Revolution Drive</p>
+    <p>Somerville, MA 02145</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -28,9 +29,11 @@ latest_posts:
 ---
 
 
-Hello! I am Yiqi Tian, a final year Ph.D. student in the [Industrial Engineering department](https://www.engineering.pitt.edu/people/students/industrial/yiqi-tian/) at the University of Pittsburgh and a research assistant at the [Center for Advanced Medical Computing and Analysis (CAMCA)](https://camca.mgh.harvard.edu/), Department of Radiology at MGH, Harvard Medical School. I am deeply grateful for the guidance of my advisor, [Dr. Bo Zeng](https://scholar.google.com/citations?user=RSdgv2YAAAAJ&hl=en). 
+Hello! I am Yiqi (Verna) Tian, a postdoctoral research fellow at the [Center for Advanced Medical Computing and Analysis (CAMCA)](https://camca.mgh.harvard.edu/), Department of Radiology, Massachusetts General Hospital and Harvard Medical School. I received my Ph.D. in [Industrial Engineering](https://www.engineering.pitt.edu/people/students/industrial/yiqi-tian/) from the University of Pittsburgh in 2026, where I was fortunate to be advised by [Dr. Bo Zeng](https://scholar.google.com/citations?user=RSdgv2YAAAAJ&hl=en).
 
-My research focuses on advancing robust optimization methodologies, with applications in healthcare management and generative AI. I earned my undergraduate degree in Industrial Engineering from both the University of Pittsburgh and Sichuan University Pittsburgh Institute in 2020.
+My research focuses on developing optimization methods for decision-making under uncertainty, with applications in healthcare operations and trustworthy AI. I am particularly interested in distributionally robust optimization, decision-dependent uncertainty, and the intersection of optimization and machine learning. My work aims to bridge methodological advances with real-world challenges, especially in improving healthcare delivery and developing more reliable and fair AI systems. I enjoy working on problems that connect mathematical methods with practical applications, and I am always excited to learn from and collaborate with researchers from different backgrounds.
+
+I earned my undergraduate degree in Industrial Engineering through the joint program between the University of Pittsburgh and Sichuan University Pittsburgh Institute in 2020.
 
 
 #### Collaborators
