@@ -158,20 +158,6 @@
       {% endif %}
     </div>
 
-    <!-- Co-first author note -->
-    {% assign has_cofirst = false %}
-    {% for author in entry.author_array %}
-      {% if author.last contains '*' %}
-        {% assign has_cofirst = true %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-    {% if has_cofirst %}
-      <div style="font-size: 0.85em; color: #666; margin-top: 0.25rem; margin-bottom: 0.5rem;">
-        <sup>*</sup>Equal contribution
-      </div>
-    {% endif %}
-
     <!-- Links - Only Code and Slides -->
     <div class="links" style="font-size: 0.9em; color: #666;">
       {% assign link_count = 0 %}
