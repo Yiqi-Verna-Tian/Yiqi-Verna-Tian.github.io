@@ -29,7 +29,7 @@ latest_posts:
 ---
 
 
-Hello! I am Yiqi (Verna) Tian, a postdoctoral research fellow at the [Center for Advanced Medical Computing and Analysis (CAMCA)](https://camca.mgh.harvard.edu/), Department of Radiology, Massachusetts General Hospital and Harvard Medical School. I received my Ph.D. in [Industrial Engineering](https://www.engineering.pitt.edu/people/students/industrial/yiqi-tian/) from the University of Pittsburgh in 2026, where I was fortunate to be advised by [Dr. Bo Zeng](https://scholar.google.com/citations?user=RSdgv2YAAAAJ&hl=en).
+Hello! I am Yiqi (Verna) Tian, a postdoctoral research fellow at the [Center for Advanced Medical Computing and Analysis (CAMCA)](https://camca.mgh.harvard.edu/), Department of Radiology, Massachusetts General Hospital and Harvard Medical School. My postdoctoral research is supervised by [Dr. Quanzheng Li](https://camca.mgh.harvard.edu/people/faculty/). I received my Ph.D. in [Industrial Engineering](https://www.engineering.pitt.edu/people/students/industrial/yiqi-tian/) from the University of Pittsburgh in 2026, where I was fortunate to be advised by [Dr. Bo Zeng](https://scholar.google.com/citations?user=RSdgv2YAAAAJ&hl=en).
 
 My research focuses on developing optimization methods for decision-making under uncertainty, with applications in healthcare operations and trustworthy AI. I am particularly interested in distributionally robust optimization, decision-dependent uncertainty, and the intersection of optimization and machine learning. My work aims to bridge methodological advances with real-world challenges, especially in improving healthcare delivery and developing more reliable and fair AI systems. I enjoy working on problems that connect mathematical methods with practical applications, and I am always excited to learn from and collaborate with researchers from different backgrounds.
 
@@ -40,7 +40,6 @@ I earned my undergraduate degree in Industrial Engineering through the joint pro
 
 I feel incredibly lucky to work with an amazing group of collaborators, whose support has shaped my research journey:
 
-- [Dr. Quanzheng Li](https://camca.mgh.harvard.edu/people/faculty/), Massachusetts General Hospital & Harvard Medical School
 - [Dr. Na Li](https://nali.seas.harvard.edu/), Harvard John A. Paulson School of Engineering and Applied Sciences
 - [Dr. Juan Carlos Puyana](https://www.surgery.pitt.edu/people/juan-c-puyana-md), University of Pittsburgh Medical Center (UPMC)
 - [Dr. Pratap Kumar](https://www.linkedin.com/in/pratap-kumar-b173467/?originalSubdomain=uk), Strathmore University, Kenya
